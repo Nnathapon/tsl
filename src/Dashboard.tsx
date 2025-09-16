@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createClient } from "@supabase/supabase-js";
+import { createClient, type User } from "@supabase/supabase-js";
 
 const supabase = createClient(
   "https://pgajyljliehhfxmbhvnx.supabase.co",
@@ -40,7 +40,7 @@ export default function Dashboard() {
   }
 
   return (
-    <body className="flex flex-col h-screen w-screen bg-black text-gray-100">
+    <div className="flex flex-col h-screen w-screen bg-black text-gray-100">
       <header className="flex items-center justify-between bg-gray-900 px-6 py-4 shadow-md">
         <div className="text-lg font-medium">
           Welcome, {user?.user_metadata?.fullName || user?.email}
@@ -83,6 +83,6 @@ export default function Dashboard() {
           <p>No user found.</p>
         )}
       </main>
-    </body>
+    </div>
   );
 }

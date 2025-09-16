@@ -25,15 +25,17 @@ function Login() {
   }
 
   async function handleSubmit(e: React.FormEvent) {
+    console.log("handleSubmit called, form:", form);
     e.preventDefault();
     if (!form.email || !form.password) {
       setError("Please enter your email and password.");
       return;
     }
-    const { error } = await supabase.auth.signInWithPassword({
+    const {data, error } = await supabase.auth.signInWithPassword({
       email: form.email,
       password: form.password,
     });
+    console.log("🔍 Supabase signInWithPassword response:", { data, error });
     if (error) {
       setError(error.message);
       return;
