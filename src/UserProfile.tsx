@@ -1,16 +1,20 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { createClient } from '@supabase/supabase-js';
-import { ArrowLeft, Mail, Phone, Globe, Calendar } from 'lucide-react';
+import { ArrowLeft, Mail, Phone } from 'lucide-react';
+import { supabase } from './supabaseClient';
 
-const supabase = createClient(
-  "https://pgajyljliehhfxmbhvnx.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBnYWp5bGpsaWVoaGZ4bWJodm54Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU5NTc3NDQsImV4cCI6MjA3MTUzMzc0NH0.-2qqzzOmFeor3QwofbULz4-24Uo-CroWfio2c9Z6mLc"
-);
+interface Profile {
+  id: string;
+  full_name?: string;
+  username?: string;
+  about?: string;
+  avatar_url?: string;
+  phone_number?: string;
+}
 
 function UserProfile() {
   const { userid } = useParams();
-  const [profile, setProfile] = useState(null);
+  const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -28,7 +32,7 @@ function UserProfile() {
 
       } catch (error) {
         console.error('Error fetching profile:', error);
-        setError(error.message);
+        setError((error as any).message);
       } finally {
         setLoading(false);
       }

@@ -1,13 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { createClient } from "@supabase/supabase-js";
 import { User, Mail, Phone, Lock } from "lucide-react";
-
-// Initialize Supabase client
-const supabase = createClient(
-  "https://pgajyljliehhfxmbhvnx.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBnYWp5bGpsaWVoaGZ4bWJodm54Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU5NTc3NDQsImV4cCI6MjA3MTUzMzc0NH0.-2qqzzOmFeor3QwofbULz4-24Uo-CroWfio2c9Z6mLc"
-);
+import { supabase } from "./supabaseClient";
 
 function Register() {
   const [form, setForm] = useState({

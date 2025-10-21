@@ -1,3 +1,4 @@
+import type { User } from '@supabase/supabase-js';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createClient } from '@supabase/supabase-js';
@@ -22,14 +23,22 @@ const supabase = createClient(
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBnYWp5bGpsaWVoaGZ4bWJodm54Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU5NTc3NDQsImV4cCI6MjA3MTUzMzc0NH0.-2qqzzOmFeor3QwofbULz4-24Uo-CroWfio2c9Z6mLc"
 );
 
+interface FormData {
+  location: string;
+  price: string;
+  size: string;
+  amenities: string[];
+  image_url: string;
+}
+
 const AddBuilding = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [message, setMessage] = useState({ type: '', text: '' });
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     location: '',
     price: '',
     size: '',
@@ -61,14 +70,14 @@ const AddBuilding = () => {
     setUser(user);
   };
 
-  const handleInputChange = (field, value) => {
+  const handleInputChange = (field: keyof FormData, value: string) => {
     setFormData(prev => ({
       ...prev,
       [field]: value
     }));
   };
 
-  const handleAmenityToggle = (amenity) => {
+  const handleAmenityToggle = (amenity: string) => {
     setFormData(prev => ({
       ...prev,
       amenities: prev.amenities.includes(amenity)
@@ -87,14 +96,14 @@ const AddBuilding = () => {
     }
   };
 
-  const removeAmenity = (amenityToRemove) => {
+  const removeAmenity = (amenityToRemove: string) => {
     setFormData(prev => ({
       ...prev,
       amenities: prev.amenities.filter(amenity => amenity !== amenityToRemove)
     }));
   };
 
-  const handleImageUpload = async (event) => {
+  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (!file) return;
 
@@ -123,12 +132,13 @@ const AddBuilding = () => {
     }
   };
 
-  const uploadToSupabase = async (file) => {
+  const uploadToSupabase = async (file: File) => {
+    if (!user) throw new Error('User not found');
     const fileExt = file.name.split('.').pop();
-    const fileName = `${user.id}-${Date.now()}.${fileExt}`;
+    const fileName = `${user!.id}-${Date.now()}.${fileExt}`;
     const filePath = `buildings/${fileName}`;
 
-    const { data: uploadData, error: uploadError } = await supabase.storage
+    const { error: uploadError } = await supabase.storage
       .from('avatars')
       .upload(filePath, file, {
         cacheControl: '3600',
@@ -144,15 +154,13 @@ const AddBuilding = () => {
     return publicUrl;
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     setMessage({ type: '', text: '' });
 
     try {
-      if (!user) {
-        throw new Error('No user found');
-      }
+      if (!user) throw new Error('User not found');
 
       // Validate required fields
       if (!formData.location || !formData.price || !formData.size) {
@@ -160,7 +168,7 @@ const AddBuilding = () => {
       }
 
       const buildingData = {
-        seller_id: user.id,
+        seller_id: user!.id,
         location: formData.location,
         price: parseFloat(formData.price),
         size: parseInt(formData.size),
@@ -191,7 +199,7 @@ const AddBuilding = () => {
 
     } catch (error) {
       console.error('Error creating listing:', error);
-      setMessage({ type: 'error', text: error.message });
+      setMessage({ type: 'error', text: (error as any).message });
     } finally {
       setLoading(false);
     }

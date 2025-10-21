@@ -1,12 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createClient, type User } from "@supabase/supabase-js";
 import { Building2, User as UserIcon, LogOut } from 'lucide-react';
-
-const supabase = createClient(
-  "https://pgajyljliehhfxmbhvnx.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBnYWp5bGpsaWVoaGZ4bWJodm54Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU5NTc3NDQsImV4cCI6MjA3MTUzMzc0NH0.-2qqzzOmFeor3QwofbULz4-24Uo-CroWfio2c9Z6mLc"
-);
+import { supabase } from './supabaseClient';
+import type { User } from '@supabase/supabase-js';
 
 export default function Dashboard() {
   const [user, setUser] = useState<User | null>(null);

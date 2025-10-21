@@ -1,11 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createClient, type User } from "@supabase/supabase-js";
-
-const supabase = createClient(
-  "https://pgajyljliehhfxmbhvnx.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBnYWp5bGpsaWVoaGZ4bWJodm54Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTU5NTc3NDQsImV4cCI6MjA3MTUzMzc0NH0.-2qqzzOmFeor3QwofbULz4-24Uo-CroWfio2c9Z6mLc"
-);
+import { supabase } from './supabaseClient';
+import type { User } from '@supabase/supabase-js';
 
 const ProfileSettings = () => {
   const [user, setUser] = useState<User | null>(null);
@@ -141,7 +137,7 @@ const ProfileSettings = () => {
       const filePath = `profiles/${fileName}`;
 
       // Upload file to Supabase Storage :cite[4]:cite[5]
-      const { data: uploadData, error: uploadError } = await supabase.storage
+      const { error: uploadError } = await supabase.storage
         .from('avatars').upload(filePath, file);
 
       if (uploadError) throw uploadError;
@@ -214,7 +210,7 @@ const ProfileSettings = () => {
       }, 1000);
     } catch (error) {
       console.error('Error updating profile:', error);
-      setMessage({ type: 'error', text: `Failed to update profile: ${error.message}` });
+      setMessage({ type: 'error', text: `Failed to update profile: ${(error as any).message}` });
     } finally {
       setSaving(false);
     }
