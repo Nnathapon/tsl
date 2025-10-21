@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { createClient } from "@supabase/supabase-js";
+import { User, Mail, Phone, Lock } from "lucide-react";
 
 // Initialize Supabase client
 const supabase = createClient(
@@ -76,38 +77,50 @@ function Register() {
         Create Your Account
       </h2>
       <form className="space-y-6" onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          placeholder="Full Name"
-          className="w-full px-4 py-3 border border-green-200 dark:border-green-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 dark:bg-gray-900 dark:text-green-100 text-lg"
-          value={form.name}
-          onChange={handleChange}
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          className="w-full px-4 py-3 border border-green-200 dark:border-green-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 dark:bg-gray-900 dark:text-green-100 text-lg"
-          value={form.email}
-          onChange={handleChange}
-        />
-        <input
-          type="tel"
-          name="phone"
-          placeholder="Phone"
-          className="w-full px-4 py-3 border border-green-200 dark:border-green-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 dark:bg-gray-900 dark:text-green-100 text-lg"
-          value={form.phone}
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          className="w-full px-4 py-3 border border-green-200 dark:border-green-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 dark:bg-gray-900 dark:text-green-100 text-lg"
-          value={form.password}
-          onChange={handleChange}
-        />
+        <div className="relative">
+          <User className="absolute left-3 top-1/2 -translate-y-1/2 text-green-500 dark:text-green-300 w-5 h-5" />
+          <input
+            type="text"
+            name="name"
+            placeholder="Full Name"
+            className="w-full px-4 py-3 pl-10 border border-green-200 dark:border-green-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 dark:bg-gray-900 dark:text-green-100 text-lg"
+            value={form.name}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="relative">
+          <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-green-500 dark:text-green-300 w-5 h-5" />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            className="w-full px-4 py-3 pl-10 border border-green-200 dark:border-green-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 dark:bg-gray-900 dark:text-green-100 text-lg"
+            value={form.email}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="relative">
+          <Phone className="absolute left-3 top-1/2 -translate-y-1/2 text-green-500 dark:text-green-300 w-5 h-5" />
+          <input
+            type="tel"
+            name="phone"
+            placeholder="Phone"
+            className="w-full px-4 py-3 pl-10 border border-green-200 dark:border-green-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 dark:bg-gray-900 dark:text-green-100 text-lg"
+            value={form.phone}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="relative">
+          <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-green-500 dark:text-green-300 w-5 h-5" />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            className="w-full px-4 py-3 pl-10 border border-green-200 dark:border-green-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 dark:bg-gray-900 dark:text-green-100 text-lg"
+            value={form.password}
+            onChange={handleChange}
+          />
+        </div>
         <label className="flex items-center space-x-2 text-gray-900 dark:text-green-100 text-sm">
           <input
             type="checkbox"

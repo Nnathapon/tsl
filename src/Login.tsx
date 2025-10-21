@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Mail, Lock } from "lucide-react";
 import { Link } from "react-router-dom";
 import { createClient } from "@supabase/supabase-js";
 import { useNavigate } from "react-router";
@@ -51,22 +52,28 @@ function Login() {
         Login to Your Account
       </h2>
       <form className="space-y-6" onSubmit={handleSubmit}>
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          className="w-full px-4 py-3 border border-green-200 dark:border-green-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 dark:bg-gray-900 dark:text-green-100 text-lg"
-          value={form.email}
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          className="w-full px-4 py-3 border border-green-200 dark:border-green-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 dark:bg-gray-900 dark:text-green-100 text-lg"
-          value={form.password}
-          onChange={handleChange}
-        />
+        <div className="relative">
+          <Mail className="absolute left-3 top-1/2 -translate-y-1/2 text-green-500 dark:text-green-300 w-5 h-5" />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            className="w-full px-4 py-3 pl-10 border border-green-200 dark:border-green-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 dark:bg-gray-900 dark:text-green-100 text-lg"
+            value={form.email}
+            onChange={handleChange}
+          />
+        </div>
+        <div className="relative">
+            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 text-green-500 dark:text-green-300 w-5 h-5" />
+            <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            className="w-full px-4 py-3 pl-10 border border-green-200 dark:border-green-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 dark:bg-gray-900 dark:text-green-100 text-lg"
+            value={form.password}
+            onChange={handleChange}
+          />
+        </div>
         {error && (
           <div className="text-red-600 dark:text-red-400 text-sm text-center">
             {error}

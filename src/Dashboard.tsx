@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { createClient, type User } from "@supabase/supabase-js";
+import { Building2, User as UserIcon, LogOut } from 'lucide-react';
 
 const supabase = createClient(
   "https://pgajyljliehhfxmbhvnx.supabase.co",
@@ -33,56 +34,40 @@ export default function Dashboard() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-screen w-screen bg-black text-gray-100">
-        <span className="text-gray-500">Loading user data...</span>
+      <div className="flex items-center justify-center min-h-screen w-full bg-gradient-to-br from-gray-900 to-gray-800 text-gray-100">
+        <span className="text-gray-400">Loading user data...</span>
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col h-screen w-screen bg-black text-gray-100">
-      <header className="flex items-center justify-between bg-gray-900 px-6 py-4 shadow-md">
-        <div className="text-lg font-medium">
-          Welcome, {user?.user_metadata?.fullName || user?.email}
-        </div>
-        <div className="flex-grow mx-6">
-          <input
-            type="text"
-            placeholder="Quick Search..."
-            className="w-full max-w-md px-4 py-2 rounded-full bg-gray-700 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          />
-        </div>
-        <div className="flex space-x-4">
-          <button className="p-2 rounded-full hover:bg-gray-700" aria-label="Notifications">
-            🔔
-          </button>
-          <button className="p-2 rounded-full hover:bg-gray-700" aria-label="Messages">
-            💬
+    <div className="w-full max-w-3xl mx-auto mt-20 p-12 bg-gray-800/90 text-white rounded-2xl shadow-2xl backdrop-blur-lg flex flex-col">
+        <h1 className="text-2xl font-bold text-center mb-6">
+          Welcome, {user?.user_metadata?.full_name || 'User'} 👋
+        </h1>
+        <div className="flex flex-col gap-4">
+          <button
+            className="flex items-center justify-center space-x-2 py-3 rounded-lg font-semibold transition transform hover:scale-105 bg-green-600 hover:bg-green-700 shadow"
+            onClick={() => navigate('/myprofile')}
+          >
+            <UserIcon className="w-6 h-6" />
+            <span>My Profile</span>
           </button>
           <button
-            className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700"
+            className="flex items-center justify-center space-x-2 py-3 rounded-lg font-semibold transition transform hover:scale-105 bg-blue-600 hover:bg-blue-700 shadow"
+            onClick={() => navigate('/addbuilding')}
+          >
+            <Building2 className="w-6 h-6" />
+            <span>Add Building</span>
+          </button>
+          <button
+            className="flex items-center justify-center space-x-2 py-3 rounded-lg font-semibold transition transform hover:scale-105 bg-red-600 hover:bg-red-700 shadow"
             onClick={handleSignOut}
           >
-            Sign Out
+            <LogOut className="w-6 h-6" />
+            <span>Logout</span>
           </button>
         </div>
-      </header>
-      <main className="p-6 flex-grow">
-        <h2 className="text-2xl font-semibold">User Data</h2>
-        {user ? (
-          <div className="bg-gray-800 p-4 rounded-lg mt-6 text-gray-200">
-            <p><strong>ID:</strong> {user.id}</p>
-            <p><strong>Email:</strong> {user.email || '—'}</p>
-            <p><strong>Role:</strong> {user.role}</p>
-            <p><strong>Last Sign-In:</strong> {user.last_sign_in_at}</p>
-            <div>
-              <strong>name:</strong>{user?.user_metadata.fullName}
-            </div>
-          </div>
-        ) : (
-          <p>No user found.</p>
-        )}
-      </main>
-    </div>
+      </div>
   );
 }

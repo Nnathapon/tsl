@@ -2,7 +2,7 @@ function Terms() {
   return (
     <div className="w-full text-left max-w-2xl bg-white dark:bg-gray-800 rounded-2xl shadow-2xl border border-green-100 dark:border-green-900 p-8">
         <h1 className="text-3xl font-bold text-green-700 dark:text-green-400 mb-4">Terms of Service</h1>
-        <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">Last Updated: 1 September 2025</p>
+        <p className="mb-2 text-sm text-white dark:text-white">Last Updated: 1 September 2025</p>
         <ol className="space-y-4 list-decimal ml-6">
           <li>
             <b>Acceptance of Terms</b><br />
