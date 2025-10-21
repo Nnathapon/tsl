@@ -16,7 +16,7 @@ document.title = "TSL Asset"
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/tsl/">
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/register" element={<Register />} />
