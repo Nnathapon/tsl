@@ -11,6 +11,8 @@ import Dashboard from './Dashboard'
 import ProfileSettings from './ProfileSettings.tsx'
 import UserProfile from './UserProfile.tsx'
 import AddBuilding from './AddBuilding.tsx'
+import Building from './Building.tsx'
+import BuildingList from './BuildingList.tsx'
 
 document.title = "TSL Asset"
 
@@ -27,6 +29,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <Route path="/user/:userid" element={<UserProfile />} />
         <Route path="/myprofile" element={<ProfileSettings />} />
         <Route path="/addbuilding" element={<AddBuilding />} />
+        <Route path="/building/:id" element={<Building />} />
+        <Route path="/buildings" element={<BuildingList />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>,

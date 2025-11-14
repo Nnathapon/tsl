@@ -2,21 +2,7 @@ import type { User } from '@supabase/supabase-js';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from './supabaseClient';
-import { 
-  Upload, 
-  MapPin, 
-  DollarSign, 
-  Ruler, 
-  Plus, 
-  X, 
-  Home,
-  Wifi,
-  Car,
-  Snowflake,
-  Dumbbell,
-  Waves,
-  Utensils
-} from 'lucide-react';
+import {  Upload,   MapPin,   DollarSign,   Ruler,   Plus,   X,   Home,  Wifi,  Car,  Snowflake,  Dumbbell,  Waves,  Utensils,  Video} from 'lucide-react';
 
 interface FormData {
   location: string;
@@ -24,6 +10,7 @@ interface FormData {
   size: string;
   amenities: string[];
   image_url: string;
+  video_url: string;
 }
 
 const AddBuilding = () => {
@@ -38,7 +25,8 @@ const AddBuilding = () => {
     price: '',
     size: '',
     amenities: [],
-    image_url: ''
+    image_url: '',
+    video_url: '',
   });
 
   const [customAmenity, setCustomAmenity] = useState('');
@@ -169,6 +157,7 @@ const AddBuilding = () => {
         size: parseInt(formData.size),
         amenities: formData.amenities,
         image_url: formData.image_url,
+        video_url: formData.video_url,
         created_at: new Date().toISOString()
       };
 
@@ -186,7 +175,8 @@ const AddBuilding = () => {
         price: '',
         size: '',
         amenities: [],
-        image_url: ''
+        image_url: '',
+        video_url: '',
       });
 
       // Redirect after success
@@ -283,6 +273,22 @@ const AddBuilding = () => {
                 </div>
               )}
             </div>
+            {/* Video URL */}
+              <div className="md:col-span-2">
+                <label className="block text-sm font-medium text-gray-300 mb-3">
+                  <div className="flex items-center space-x-2">
+                    <Video className="w-4 h-4" />
+                    <span>Video link</span>
+                  </div>
+                </label>
+                <input
+                  type="text"
+                  value={formData.video_url}
+                  onChange={(e) => handleInputChange('video_url', e.target.value)}
+                  className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-colors"
+                  placeholder="https://youtube.com/your-video-link"
+                />
+              </div>
           </div>
 
           {/* Property Details */}
@@ -317,14 +323,15 @@ const AddBuilding = () => {
                   </div>
                 </label>
                 <input
-                  type="number"
+                  type="text"
                   required
                   min="0"
                   step="1000"
-                  value={formData.price}
-                  onChange={(e) => handleInputChange('price', e.target.value)}
+                  value={formData.price ? Number(formData.price).toLocaleString() : ''}
+                  onChange={(e) => handleInputChange('price', e.target.value.replace(/,/g, ''))}
                   className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-colors"
                   placeholder="0.00"
+                  inputMode="numeric"
                 />
               </div>
 
@@ -337,15 +344,18 @@ const AddBuilding = () => {
                   </div>
                 </label>
                 <input
-                  type="number"
+                  type="text"
                   required
                   min="0"
-                  value={formData.size}
-                  onChange={(e) => handleInputChange('size', e.target.value)}
+                  value={formData.size ? Number(formData.size).toLocaleString() : ''}
+                  onChange={(e) => handleInputChange('size', e.target.value.replace(/,/g, ''))}
                   className="w-full bg-gray-700 border border-gray-600 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:border-purple-600 focus:outline-none focus:ring-2 focus:ring-purple-500/20 transition-colors"
                   placeholder="Square meters"
+                  inputMode="numeric"
                 />
               </div>
+
+              
             </div>
           </div>
 

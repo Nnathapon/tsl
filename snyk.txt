@@ -1,0 +1,39 @@
+
+Testing /Users/ntt/Downloads/codes/tst/vite-project ...
+
+Open Issues
+
+ ✗ [MEDIUM] DOM-based Cross-site Scripting (XSS)
+   Finding ID: ee208400-2bc1-47a1-b338-64e8fef2c079
+   Path: src/AddBuilding.tsx, line 244
+   Info: Unsanitized input from a React useState value flows into a script 'src' attribute, where it is used to dynamically construct the HTML page on client side. This may result in a DOM Based Cross-Site Scripting attack (DOMXSS).
+
+ ✗ [MEDIUM] DOM-based Cross-site Scripting (XSS)
+   Finding ID: b4fee083-9a1b-4b0e-9b30-3f0581ce29f8
+   Path: src/UserProfile.tsx, line 118
+   Info: Unsanitized input from a React useState value flows into a script 'src' attribute, where it is used to dynamically construct the HTML page on client side. This may result in a DOM Based Cross-Site Scripting attack (DOMXSS).
+
+ ✗ [MEDIUM] DOM-based Cross-site Scripting (XSS)
+   Finding ID: ac45949c-b3f0-4b20-8d21-a5d67e50cbc9
+   Path: src/ProfileSettings.tsx, line 265
+   Info: Unsanitized input from a React html event value flows into a script 'src' attribute, where it is used to dynamically construct the HTML page on client side. This may result in a DOM Based Cross-Site Scripting attack (DOMXSS).
+
+
+
+╭─────────────────────────────────────────────────────────────────────╮
+│ Test Summary                                                        │
+│                                                                     │
+│   Organization:      nnathapon                                      │
+│   Test type:         Static code analysis                           │
+│   Project path:      /Users/ntt/Downloads/codes/tst/vite-project    │
+│                                                                     │
+│   Total issues:   3                                                 │
+│   Ignored issues: 0 [ 0 HIGH  0 MEDIUM  0 LOW ]                     │
+│   Open issues:    3 [ 0 HIGH  3 MEDIUM  0 LOW ]                     │
+╰─────────────────────────────────────────────────────────────────────╯
+    
+💡 Tip
+
+   To view ignored issues, use the --include-ignores option.
+                                                            
+

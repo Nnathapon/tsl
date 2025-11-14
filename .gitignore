@@ -40,3 +40,6 @@ node_modules
 playground-temp
 temp
 TODOs.md
+
+.env
+coverage

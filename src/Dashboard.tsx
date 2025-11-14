@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Building2, User as UserIcon, LogOut } from 'lucide-react';
+import { Search, Building2, User as UserIcon, LogOut } from 'lucide-react';
 import { supabase } from './supabaseClient';
 import type { User } from '@supabase/supabase-js';
 
@@ -55,6 +55,13 @@ export default function Dashboard() {
           >
             <Building2 className="w-6 h-6" />
             <span>Add Building</span>
+          </button>
+          <button
+            className="flex items-center justify-center space-x-2 py-3 rounded-lg font-semibold transition transform hover:scale-105 bg-purple-600 hover:bg-purple-700 shadow"
+            onClick={() => navigate('/buildings')}
+          >
+            <Search className="w-6 h-6" />
+            <span>Search Buildings</span>
           </button>
           <button
             className="flex items-center justify-center space-x-2 py-3 rounded-lg font-semibold transition transform hover:scale-105 bg-red-600 hover:bg-red-700 shadow"

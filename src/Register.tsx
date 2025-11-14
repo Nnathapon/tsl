@@ -147,7 +147,7 @@ function Register() {
           </div>
         )}
         {success && (
-          <div className="text-green-600 dark:text-green-400 text-sm text-center">
+          <div className="text-red-600 dark:text-red-400 text-2xl font-bold text-center my-4">
             {success}
           </div>
         )}
